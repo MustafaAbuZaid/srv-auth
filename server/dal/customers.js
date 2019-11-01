@@ -1,5 +1,6 @@
 var config = require('../../config/config');
 const request = require('request');
+const returnClass = require('../helper/returnClass').result;
 
 module.exports = {
     getAllCustomers: function (callback) {
@@ -35,7 +36,14 @@ module.exports = {
             method: "POST",
             json: newCustomer
         }, (err, data, response) => {
+            if(response == "undefined")
+            {
+                return callback(new returnClass("User not exists,Please register", null));
+            }
+            else
+            {
             return callback(response);
+            }
         })
     }
 }
